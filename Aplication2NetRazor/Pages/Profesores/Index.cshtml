@@ -1,0 +1,56 @@
+﻿@page
+@model Aplication2NetRazor.Pages.Profesores.IndexModel
+@{
+    ViewData["Title"] = "Listado de Profesores";
+}
+
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-sm-6">
+                <h2 class="text-info">Listado de profesores</h2>
+            </div>
+            <div class="col-sm-6">
+                <a asp-page="Registrar" class="btn btn-primary">Registrar nuevo profesor</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        @if (Model.Profesores.Count() > 0)
+        {
+            <table>
+                <tr>
+                    <th>@Html.DisplayNameFor(m=>m.Profesores.First().idProfesor)</th>
+                    <th>@Html.DisplayNameFor(m=>m.Profesores.First().NombreProfesor)</th>
+                    <th>@Html.DisplayNameFor(m=>m.Profesores.First().ApellidoProfesor)</th>
+                    <th>@Html.DisplayNameFor(m=>m.Profesores.First().Especialidad)</th>
+                    <th>@Html.DisplayNameFor(m=>m.Profesores.First().Fecha_nac)</th>
+                    <th>@Html.DisplayNameFor(m=>m.Profesores.First().Fecha_ing)</th>
+                    <th>Acciones</th>
+                </tr>
+                @foreach(var item in Model.Profesores)
+                {
+                    if (item.Eliminado == false)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(m=>item.idProfesor)</td>
+                            <td>@Html.DisplayFor(m=>item.NombreProfesor)</td>
+                            <td>@Html.DisplayFor(m=>item.ApellidoProfesor)</td>
+                            <td>@Html.DisplayFor(m=>item.Especialidad)</td>
+                            <td>@Html.DisplayFor(m=>item.Fecha_nac)</td>
+                            <td>@Html.DisplayFor(m=>item.Fecha_ing)</td>
+                            <td>
+                                <a asp-route-id="@item.idProfesor" asp-page="Editar" class=" btn btn-success btn-sm">Editar</a>
+                                <a asp-route-id="@item.idProfesor" asp-page="Borrar" class="btn btn-danger btn-sm">Borrar</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        }
+        else
+        {
+            <p>No existen profesores</p>
+        }
+    </div>
+</div>
